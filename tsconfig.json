@@ -1,0 +1,19 @@
+{
+    "compilerOptions": {
+        "strict": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+        "esModuleInterop": true,
+        "importHelpers": true,
+        "skipLibCheck": true,
+        "resolveJsonModule": true,
+        "module": "es2022",
+        "target": "es2020",
+        "moduleResolution": "node",
+        "lib": ["ESNext"],
+        "types": ["mocha", "node", "chai", "yargs"],
+        "outDir": "dist"
+    },
+    "include": ["src"],
+    "exclude": ["dist"]
+}
