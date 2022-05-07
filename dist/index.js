@@ -41,7 +41,7 @@ const options = {
         type: "string"
     },
     l: {
-        alias: "languages",
+        alias: "language",
         type: "array"
     },
     mu: {
@@ -54,7 +54,7 @@ const options = {
         type: "string"
     },
     on: {
-        alias: "orgname",
+        alias: "org-name",
         type: "string"
     },
     op: {
@@ -62,7 +62,7 @@ const options = {
         type: "string"
     },
     ou: {
-        alias: "orgurl",
+        alias: "org-url",
         type: "string"
     },
     p: {
@@ -83,7 +83,7 @@ const options = {
         type: "string"
     },
     tg: {
-        alias: "tags",
+        alias: "tag",
         default: defaultTags,
         type: "array"
     },
