@@ -77,7 +77,7 @@ export const generateStackApps = (
 
     const minified = minifiedURL ? ` | ${mdLink(minifiedURL, "Minified")}` : "";
 
-    const org = orgName ? `Organization: ${orgURL ? mdLink(orgURL, orgName) : orgName}` : "";
+    const org = orgName ? `<br>Organization: ${orgURL ? mdLink(orgURL, orgName) : orgName}` : "";
 
     const room = roomURL ? `\nYou can also ${mdLink(roomURL, "drop by to chat")}, we are a friendly bunch.` : "";
 
@@ -126,8 +126,8 @@ Version number means "last tested on":
 Author: ${authorUrl ? mdLink(authorUrl, authorName) : authorName}
 ${org}
 
-Please, submit bug reports ${mdLink(`https://github.com/${normalizedScopedName}/issues`, "on the source repository")}
-Before adding a new one, please check if it hasn't been raised before.
+Please, submit bug reports ${mdLink(`https://github.com/${normalizedScopedName}/issues`, "on the source repository")}.
+<br>Before adding a new one, please check if it hasn't been raised before.
 ${room}
 
 ## Code

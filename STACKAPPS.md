@@ -68,7 +68,7 @@ If you opt to install it from the GitHub registry, please note that it only supp
 @userscripters:registry=https://npm.pkg.github.com
 ```
 
-You will also need to be logged in to GitHub. An easy way to do so is to have a global `.npmrc` with your PAT ([personal access token][5]) set as an access token:
+You will also need to be logged in to GitHub. An easy way to do so is to have a global `.npmrc` with your PAT ([personal access token](https://docs.github.com/en/github/authenticating-to-github/keeping-your-account-and-data-secure/creating-a-personal-access-token)) set as an access token:
 
 ```npmrc
 //npm.pkg.github.com/:_authToken=<your token here>
@@ -116,10 +116,10 @@ Best used with [TypeScript](https://www.typescriptlang.org/download), but contai
 ## Contact
 
 Author: [Oleg Valter](https://stackoverflow.com/users/11407695)
-Organization: [UserScripters](https://github.com/userscripters)
+<br>Organization: [UserScripters](https://github.com/userscripters)
 
-Please, submit bug reports [on the source repository](https://github.com/userscripters/generate-stackapps/issues)
-Before adding a new one, please check if it hasn't been raised before.
+Please, submit bug reports [on the source repository](https://github.com/userscripters/generate-stackapps/issues).
+<br>Before adding a new one, please check if it hasn't been raised before.
 
 You can also [drop by to chat](https://chat.stackoverflow.com/rooms/214345), we are a friendly bunch.
 
