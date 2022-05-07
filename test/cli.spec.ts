@@ -12,7 +12,7 @@ describe("CLI", function () {
     this.timeout(5000); // CLI runs can be slow
 
     const entry = "./src/index.ts";
-    const output = "./stackapps.md";
+    const output = "./test/stackapps.md";
 
     const cliPfx = `node --loader ts-node/esm ${entry}`;
 
