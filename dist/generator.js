@@ -1,3 +1,4 @@
+import chalk from "chalk";
 import { appendFile } from "fs/promises";
 import { generateStackApps } from "./stackapps.js";
 import { getPackage } from "./utils/package.js";
@@ -10,11 +11,11 @@ export const generate = async (options) => {
     try {
         const pkg = await getPackage(packagePath);
         if (!pkg) {
-            // TODO: handle
+            console.log(chalk.bgRed `missing or corrupted package`);
             return;
         }
-        if (!outputPath) {
-            // TODO: handle
+        if (cli && !outputPath) {
+            console.log(chalk.bgRed `missing or output path`);
             return;
         }
         const output = generateStackApps(pkg, options);
@@ -30,8 +31,16 @@ export const generate = async (options) => {
         return output;
     }
     catch (error) {
-        console.log(error);
-        // TODO: handle
+        const exceptionObject = error;
+        const { code, name } = exceptionObject;
+        const errMap = {
+            ENOENT: ({ path }) => ["Missing path:", path],
+            default: ({ message }) => ["Something went wrong:", message],
+        };
+        const handler = errMap[code || "default"] || errMap.default;
+        const [postfix, message] = handler(exceptionObject);
+        console.log(chalk.bgRed `[${name}] ${postfix}` + `\n\n${message}`);
+        return;
     }
 };
 export default generate;

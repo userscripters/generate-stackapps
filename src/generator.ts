@@ -1,3 +1,4 @@
+import chalk from "chalk";
 import { appendFile } from "fs/promises";
 import { generateStackApps, type GeneratedPost, type GeneratorOptions } from "./stackapps.js";
 import { getPackage } from "./utils/package.js";
@@ -19,12 +20,12 @@ export const generate = async (options: CLIGeneratorOptions): Promise<GeneratedP
     try {
         const pkg = await getPackage(packagePath);
         if (!pkg) {
-            // TODO: handle
+            console.log(chalk.bgRed`missing or corrupted package`);
             return;
         }
 
-        if (!outputPath) {
-            // TODO: handle
+        if (cli && !outputPath) {
+            console.log(chalk.bgRed`missing or output path`);
             return;
         }
 
@@ -45,8 +46,21 @@ export const generate = async (options: CLIGeneratorOptions): Promise<GeneratedP
         return output;
 
     } catch (error) {
-        console.log(error);
-        // TODO: handle
+        const exceptionObject = error as NodeJS.ErrnoException;
+        const { code, name } = exceptionObject;
+        const errMap: {
+            [code: string]: (err: NodeJS.ErrnoException) => [string, string];
+        } = {
+            ENOENT: ({ path }) => ["Missing path:", path!],
+            default: ({ message }) => ["Something went wrong:", message],
+        };
+
+        const handler = errMap[code || "default"] || errMap.default;
+
+        const [postfix, message] = handler(exceptionObject);
+
+        console.log(chalk.bgRed`[${name}] ${postfix}` + `\n\n${message}`);
+        return;
     }
 };
 
