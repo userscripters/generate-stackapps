@@ -6,6 +6,8 @@ import type { PackageInfo } from "./utils/package.js";
 
 export type Browser = "chrome" | "edge" | "explorer" | "firefox" | "opera";
 
+export type ScriptManager = "tampermonkey" | "violentmonkey" | "greasemonkey";
+
 export interface GeneratorOptions {
     about?: string;
     excerpt?: string;
@@ -21,6 +23,7 @@ export interface GeneratorOptions {
     tags?: string[];
     testedIn?: Partial<Record<Browser, string>>;
     thumbnailURL?: string;
+    worksWith?: ScriptManager[];
 }
 
 export interface GeneratedPost {
@@ -62,10 +65,13 @@ export const generateStackApps = (
         tags = [],
         testedIn = {},
         thumbnailURL = "",
+        worksWith = []
     } = options;
 
     const browserNames = Object.keys(testedIn);
     const testingData = Object.values(testedIn);
+
+    const managerNames = worksWith.map(scase);
 
     const {
         name: authorName,
@@ -89,6 +95,10 @@ export const generateStackApps = (
     const room = roomURL ? `\nYou can also ${mdLink(roomURL, "drop by to chat")}, we are a friendly bunch.` : "";
 
     const screenshot = screenshotURL ? `## Screenshot\n\n!${mdLink(screenshotURL, screenshotAlt)}\n` : "";
+
+    const managers = managerNames.length ?
+        `\nSupported userscript managers:\n\n${managerNames.map((n) => `- ${scase(n)}`).join("\n")}\n` :
+        "";
 
     const body = `
 ${makeTemplateComment("thumbnail", thumbnailURL)}
@@ -118,7 +128,7 @@ Version number means "last tested on":
 | ${browserNames.map(scase).join(" | ")} |
 | ${new Array(browserNames.length).fill("-").join(" | ")} |
 | ${testingData.map((data) => data && !data.startsWith("no") ? `✔ ${data}` : "-").join(" | ")} |
-
+${managers}
 ## Change log
 
 | Version    | Description |

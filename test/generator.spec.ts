@@ -2,7 +2,7 @@ import { expect } from "chai";
 import { generateStackApps } from "../src/stackapps.js";
 import { parseAuthor } from "../src/utils/author.js";
 import { scase } from "../src/utils/common.js";
-import { about, contributors, excerpt, installURL, minifiedURL, orgName, orgURL, packageInfo, roomURL, screenshotAlt, screenshotURL, tags, testedIn, thumbnailURL } from "./fixtures.spec.js";
+import { about, contributors, excerpt, installURL, minifiedURL, orgName, orgURL, packageInfo, roomURL, screenshotAlt, screenshotURL, tags, testedIn, thumbnailURL, worksWith } from "./fixtures.spec.js";
 
 describe(generateStackApps.name, async () => {
     const output = generateStackApps(packageInfo, {
@@ -18,7 +18,8 @@ describe(generateStackApps.name, async () => {
         screenshotURL,
         tags,
         testedIn,
-        thumbnailURL
+        thumbnailURL,
+        worksWith
     });
 
     const { body, tags: generatedTags, title } = output;
@@ -73,9 +74,12 @@ describe(generateStackApps.name, async () => {
     });
 
     it('should correctly generate the platform section', () => {
-        const names = Object.keys(testedIn).map(scase).join(" | ");
-        expect(body).to.include(`| ${names} |`);
+        const browserNames = Object.keys(testedIn).map(scase).join(" | ");
+        expect(body).to.include(`| ${browserNames} |`);
         expect(body).to.include(`| ✔ ${testedIn.chrome || "-"} |`);
+
+        const managers = worksWith.map((n) => `- ${scase(n)}`).join("\n");
+        expect(body).to.include(managers);
     });
 
     it('should correctly generate org info', () => {

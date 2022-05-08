@@ -1,6 +1,6 @@
 import { AssertionError } from "chai";
 import { join } from "path";
-import type { Browser } from "../src/stackapps.js";
+import type { Browser, ScriptManager } from "../src/stackapps.js";
 import { parseAuthor } from "../src/utils/author.js";
 import { getPackage } from "../src/utils/package.js";
 
@@ -32,4 +32,9 @@ export const testedIn: Partial<Record<Browser, string>> = {
     firefox: "99.0",
     opera: "no"
 };
+export const worksWith: ScriptManager[] = [
+    "greasemonkey",
+    "tampermonkey",
+    "violentmonkey",
+];
 export const thumbnailURL = `${pkg.homepage}/thumb.png`;
