@@ -27,4 +27,6 @@ Options:
                                                    [array] [default: ["script"]]
       --tl, --title           StackApps post title                      [string]
       --th, --thumbnail       StackApps post thumbnail                  [string]
+      --ww, --works-with      Supported userscript manager (repeatable)
+              [array] [choices: "greasemonkey", "tampermonkey", "violentmonkey"]
 ```

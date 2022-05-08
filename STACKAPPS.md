@@ -3,7 +3,7 @@ Generate Stackapps - StackApps post generator for userscripts
 library typescript
 
 <!-- thumbnail: https://i.stack.imgur.com/Cbt4Z.png -->
-<!-- version: 1.1.0 -->
+<!-- version: 1.2.0 -->
 <!-- tag: library -->
 <!-- excerpt: Tired of writing Stack Apps posts by hand? With Generate StackApps you can focus on what's really important — userscripts and delegate the busywork to automation. -->
 
@@ -54,7 +54,7 @@ The script is licensed under the [GPL-3.0-or-later](https://spdx.org/licenses/GP
 
 ### Download
 
-Latest version: 1.1.0
+Latest version: 1.2.0
 
 The package is published as both an [NPM package](https://www.npmjs.com/package/@userscripters/generate-stackapps) and a [GitHub package](https://github.com/userscripters/generate-stackapps/packages/1408794). Can be installed via a package manager like NPM as usual:
 
@@ -113,6 +113,8 @@ Options:
                                                    [array] [default: ["script"]]
       --tl, --title           StackApps post title                      [string]
       --th, --thumbnail       StackApps post thumbnail                  [string]
+      --ww, --works-with      Supported userscript manager (repeatable)
+              [array] [choices: "greasemonkey", "tampermonkey", "violentmonkey"]
 ```
 
 ### Platform
