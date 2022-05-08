@@ -9,9 +9,10 @@ import { parsePackageName, prettifyPackageName } from "./utils/name.js";
  */
 export const generateStackApps = (pkg, options) => {
     const { author, contributors = [], description = "", license = "", name, version = "1.0.0" } = pkg;
-    const { about = description, excerpt = description, installURL, languages = [], minifiedURL, orgName, orgURL, postTitle, roomURL, screenshotAlt = "screenshot of the script", screenshotURL = "", tags = [], testedIn = {}, thumbnailURL = "", } = options;
+    const { about = description, excerpt = description, installURL, languages = [], minifiedURL, orgName, orgURL, postTitle, roomURL, screenshotAlt = "screenshot of the script", screenshotURL = "", tags = [], testedIn = {}, thumbnailURL = "", worksWith = [] } = options;
     const browserNames = Object.keys(testedIn);
     const testingData = Object.values(testedIn);
+    const managerNames = worksWith.map(scase);
     const { name: authorName, url: authorUrl = "" } = parseAuthor(author);
     const parsedContribs = contributors.map(parseAuthor);
     const contribs = parsedContribs.length ? `\n\nContributors:${parsedContribs.map(({ name, url }) => `\n<br>${url ? mdLink(url, name) : name}`)}` : "";
@@ -20,17 +21,17 @@ export const generateStackApps = (pkg, options) => {
     const minified = minifiedURL ? ` | ${mdLink(minifiedURL, "Minified")}` : "";
     const org = orgName ? `<br>Organization: ${orgURL ? mdLink(orgURL, orgName) : orgName}` : "";
     const room = roomURL ? `\nYou can also ${mdLink(roomURL, "drop by to chat")}, we are a friendly bunch.` : "";
-    const screenshot = screenshotURL ? `!${mdLink(screenshotURL, screenshotAlt)}` : "";
+    const screenshot = screenshotURL ? `## Screenshot\n\n!${mdLink(screenshotURL, screenshotAlt)}\n` : "";
+    const managers = managerNames.length ?
+        `\nSupported userscript managers:\n\n${managerNames.map((n) => `- ${scase(n)}`).join("\n")}\n` :
+        "";
     const body = `
 ${makeTemplateComment("thumbnail", thumbnailURL)}
 ${makeTemplateComment("version", version)}
 ${makeTemplateComment("tag", tags[0])}
 ${makeTemplateComment("excerpt", excerpt)}
 
-## Screenshot / Code Snippet
-
 ${screenshot}
-
 ## About
 
 ${about}
@@ -52,7 +53,7 @@ Version number means "last tested on":
 | ${browserNames.map(scase).join(" | ")} |
 | ${new Array(browserNames.length).fill("-").join(" | ")} |
 | ${testingData.map((data) => data && !data.startsWith("no") ? `✔ ${data}` : "-").join(" | ")} |
-
+${managers}
 ## Change log
 
 | Version    | Description |

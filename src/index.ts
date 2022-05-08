@@ -2,10 +2,13 @@ import { pathToFileURL } from "url";
 import yargs from "yargs";
 import { hideBin } from "yargs/helpers";
 import { generate } from "./generator.js";
+import { ScriptManager } from "./stackapps.js";
 
 const cli = yargs(hideBin(process.argv));
 
 const defaultTags: string[] = ["script"];
+
+const worksWithChoices: ScriptManager[] = ["greasemonkey", "tampermonkey", "violentmonkey"];
 
 const options = {
     a: {
@@ -118,6 +121,12 @@ const options = {
         description: "StackApps post thumbnail",
         type: "string"
     },
+    ww: {
+        alias: "works-with",
+        choices: worksWithChoices,
+        description: "Supported userscript manager (repeatable)",
+        type: "array"
+    }
 } as const;
 
 cli.command(
@@ -146,6 +155,7 @@ cli.command(
         tg = [],
         tl,
         th,
+        ww = []
     }) => {
         await generate({
             about: a,
@@ -172,6 +182,7 @@ cli.command(
                 opera: op
             },
             thumbnailURL: th,
+            worksWith: ww as ScriptManager[]
         });
     }
 );

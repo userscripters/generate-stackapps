@@ -4,7 +4,7 @@ import { stat, unlink } from "fs/promises";
 import { promisify } from "util";
 import { parseAuthor } from "../src/utils/author.js";
 import { scase } from "../src/utils/common.js";
-import { about, contributors, excerpt, installURL, languages, minifiedURL, orgName, orgURL, packageInfo, packagePath, roomURL, screenshotAlt, screenshotURL, tags, testedIn, thumbnailURL } from "./fixtures.spec.js";
+import { about, contributors, excerpt, installURL, languages, minifiedURL, orgName, orgURL, packageInfo, packagePath, roomURL, screenshotAlt, screenshotURL, tags, testedIn, thumbnailURL, worksWith } from "./fixtures.spec.js";
 
 const aexec = promisify(exec);
 
@@ -36,6 +36,7 @@ describe("CLI", function () {
         `--su "${screenshotURL}"`,
         ...tags.map((t) => `--tg "${t}"`),
         `--th "${thumbnailURL}"`,
+        ...worksWith.map((w) => `--ww "${w}"`)
     ];
 
     const cliRuns: string[] = [];
@@ -108,10 +109,12 @@ describe("CLI", function () {
     it('should correctly generate the platform section', () => {
         const [output] = cliRuns;
 
-        const names = Object.keys(testedIn).map(scase).join(" | ");
-
-        expect(output).to.include(`| ${names} |`);
+        const browserNames = Object.keys(testedIn).map(scase).join(" | ");
+        expect(output).to.include(`| ${browserNames} |`);
         expect(output).to.include(`| ✔ ${testedIn.chrome || "-"} |`);
+
+        const managers = worksWith.map((n) => `- ${scase(n)}`).join("\n");
+        expect(output).to.include(managers);
     });
 
     it('should correctly generate org info', () => {

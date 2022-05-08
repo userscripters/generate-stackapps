@@ -5,6 +5,7 @@ import { hideBin } from "yargs/helpers";
 import { generate } from "./generator.js";
 const cli = yargs(hideBin(process.argv));
 const defaultTags = ["script"];
+const worksWithChoices = ["greasemonkey", "tampermonkey", "violentmonkey"];
 const options = {
     a: {
         alias: "about",
@@ -116,8 +117,14 @@ const options = {
         description: "StackApps post thumbnail",
         type: "string"
     },
+    ww: {
+        alias: "works-with",
+        choices: worksWithChoices,
+        description: "Supported userscript manager (repeatable)",
+        type: "array"
+    }
 };
-cli.command("$0", `generates a StackApps post for the project`, options, async ({ a, cr, d, e, ed, ff, ie, iu, l = [], mu, o, on, ou, op, p, r, sa, su, tg = [], tl, th, }) => {
+cli.command("$0", `generates a StackApps post for the project`, options, async ({ a, cr, d, e, ed, ff, ie, iu, l = [], mu, o, on, ou, op, p, r, sa, su, tg = [], tl, th, ww = [] }) => {
     await generate({
         about: a,
         cli: import.meta.url === pathToFileURL(process.argv[1]).href,
@@ -143,6 +150,7 @@ cli.command("$0", `generates a StackApps post for the project`, options, async (
             opera: op
         },
         thumbnailURL: th,
+        worksWith: ww
     });
 });
 cli.demandCommand().help().parse();
