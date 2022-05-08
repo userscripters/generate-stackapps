@@ -3,7 +3,7 @@ Generate Stackapps - StackApps post generator for userscripts
 library typescript
 
 <!-- thumbnail: https://i.stack.imgur.com/Cbt4Z.png -->
-<!-- version: 1.0.3 -->
+<!-- version: 1.1.0 -->
 <!-- tag: library -->
 <!-- excerpt: Tired of writing Stack Apps posts by hand? With Generate StackApps you can focus on what's really important — userscripts and delegate the busywork to automation. -->
 
@@ -54,7 +54,7 @@ The script is licensed under the [GPL-3.0-or-later](https://spdx.org/licenses/GP
 
 ### Download
 
-Latest version: 1.0.3
+Latest version: 1.1.0
 
 The package is published as both an [NPM package](https://www.npmjs.com/package/@userscripters/generate-stackapps) and a [GitHub package](https://github.com/userscripters/generate-stackapps/packages/1408794). Can be installed via a package manager like NPM as usual:
 
@@ -84,29 +84,36 @@ generate-stackapps [options]
 
 There are various options one can provide to customize the output:
 
-| Long             | Short | Required | Default                      | Value      | Description                                |
-| ---------------- | ----- | -------- | ---------------------------- | ---------- | ------------------------------------------ |
-| `about`          | `a`   | no       | `<pkg.description>`          | string     | Long project description                   |
-| `chrome`         | `cr`  | no       | -                            | string     | Last tested Chrome version                 |
-| `direct`         | `d`   | no       | `false`                      | boolean    | Send output to `process.stdout` (CLI-only) |
-| `excerpt`        | `e`   | no       | `<pkg.description>`          | string     | Short project description                  |
-| `edge`           | `ed`  | no       | -                            | string     | Last tested Edge version                   |
-| `explorer`       | `ie`  | no       | -                            | string     | Last tested Internet Explorer version      |
-| `firefox`        | `ff`  | no       | -                            | string     | Last tested Firefox version                |
-| `install`        | `iu`  | yes      | -                            | valid URL  | Project installation URL                   |
-| `language`       | `l`   | no       | -                            | `string[]` | Programming languages used (repeatable)    |
-| `minified`       | `mu`  | no       | -                            | valid URL  | Minified version installation URL          |
-| `opera`          | `op`  | no       | -                            | string     | Last tested Opera version                  |
-| `org-name`       | `on`  | no       | -                            | string     | GitHub organization name                   |
-| `org-url`        | `ou`  | no       | -                            | valid URL  | GitHub organization URL                    |
-| `output`         | `o`   | no       | `./STACKAPPS.md`             | filepath   | Output file path (CLI-only)                |
-| `package`        | `p`   | no       | `./package.json`             | filepath   | Path to project's package.json             |
-| `room`           | `r`   | no       | -                            | valid URL  | Chat room URL                              |
-| `screenshot-alt` | `sa`  | no       | -                            | string     | Project screenshot alt text                |
-| `screenshot-url` | `su`  | no       | -                            | valid URL  | Project screenshot URL                     |
-| `tag`            | `tg`  | no       | `["script"]`                 | `string[]` | StackApps post tag (repeatable)            |
-| `thumbnail`      | `th`  | no       | -                            | valid URL  | StackApps post thumbnail                   |
-| `title`          | `tl`  | no       | `<pkg.name> - <description>` | string     | StackApps post title                       |
+```
+Options:
+      --version               Show version number                      [boolean]
+      --help                  Show help                                [boolean]
+  -a, --about                 Long project description                  [string]
+      --cr, --chrome          Last tested Chrome version                [string]
+  -d, --direct                Send output to process.stdout (CLI-only)
+                                                      [boolean] [default: false]
+  -e, --excerpt               Short project description                 [string]
+      --ed, --edge            Last tested Edge version                  [string]
+      --ie, --explorer        Last tested Internet Explorer version     [string]
+      --ff, --firefox         Last tested Firefox version               [string]
+      --iu, --install         Project installation URL       [string] [required]
+  -l, --language              Programming languages used (repeatable)    [array]
+      --mu, --minified        Minified version installation URL         [string]
+  -o, --output                Output file path (CLI-only)
+                                            [string] [default: "./STACKAPPS.md"]
+      --on, --org-name        GitHub organization name                  [string]
+      --op, --opera           Last tested Opera version                 [string]
+      --ou, --org-url         GitHub organization URL                   [string]
+  -p, --package               Path to project's package.json
+                                            [string] [default: "./package.json"]
+  -r, --room                  Chat room URL                             [string]
+      --sa, --screenshot-alt  Project screenshot alt text               [string]
+      --su, --screenshot-url  Project screenshot URL                    [string]
+      --tg, --tag             StackApps post tag (repeatable)
+                                                   [array] [default: ["script"]]
+      --tl, --title           StackApps post title                      [string]
+      --th, --thumbnail       StackApps post thumbnail                  [string]
+```
 
 ### Platform
 

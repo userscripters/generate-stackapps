@@ -3,10 +3,11 @@
 
 | Author       | Oleg Valter<br>[oleg.a.valter@gmail.com](mailto:oleg.a.valter@gmail.com)<br>[https://stackoverflow.com/users/11407695](https://stackoverflow.com/users/11407695) |
 | :----------- | :----------------------- |
+| Contributors | double beep<br>[https://github.com/double-beep](https://github.com/double-beep) |
 | Name | @userscripters/generate-stackapps |
 | Description | StackApps post generator for userscripts |
 | License | [GPL-3.0-or-later](https://spdx.org/licenses/GPL-3.0-or-later) |
-| Version | 1.0.3 |
+| Version | 1.1.0 |
 
 Creates StackApps post Markdown from project metadata.
 
