@@ -17,7 +17,8 @@
         "stackapps": "bash ./scripts/stackapps.sh",
         "typecheck": "tsc --noEmit",
         "test": "npm run typecheck && mocha",
-        "version": "npm run test && npm run build && git add dist && git commit --amend --no-edit"
+        "version": "npm run test && npm run build && git add dist && git commit --amend --no-edit",
+        "usage": "bash ./scripts/usage.sh"
     },
     "license": "GPL-3.0-or-later",
     "author": {
@@ -40,7 +41,7 @@
         "@types/node": "^17.0.31",
         "@types/yargs": "^17.0.10",
         "@userscripters/generate-readme": "^2.3.1",
-        "@userscripters/generate-stackapps": "^1.0.2",
+        "@userscripters/generate-stackapps": "^1.0.3",
         "chai": "^4.3.6",
         "mocha": "^10.0.0",
         "rimraf": "^3.0.2",
