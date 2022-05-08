@@ -40,6 +40,7 @@ export const generateStackApps = (
 ): GeneratedPost => {
     const {
         author,
+        contributors = [],
         description = "",
         license = "",
         name,
@@ -70,6 +71,12 @@ export const generateStackApps = (
         name: authorName,
         url: authorUrl = ""
     } = parseAuthor(author);
+
+    const parsedContribs = contributors.map(parseAuthor);
+
+    const contribs = parsedContribs.length ? `\n\nContributors:${parsedContribs.map(
+        ({ name, url }) => `\n<br>${url ? mdLink(url, name) : name}`
+    )}` : "";
 
     const { packageName, normalizedScopedName } = parsePackageName(name);
 
@@ -124,7 +131,7 @@ Version number means "last tested on":
 ## Contact
 
 Author: ${authorUrl ? mdLink(authorUrl, authorName) : authorName}
-${org}
+${org}${contribs}
 
 Please, submit bug reports ${mdLink(`https://github.com/${normalizedScopedName}/issues`, "on the source repository")}.
 <br>Before adding a new one, please check if it hasn't been raised before.

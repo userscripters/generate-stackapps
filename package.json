@@ -26,7 +26,12 @@
         "email": "oleg.a.valter@gmail.com",
         "url": "https://stackoverflow.com/users/11407695"
     },
-    "contributors": [],
+    "contributors": [
+        {
+            "name": "double beep",
+            "url": "https://github.com/double-beep"
+        }
+    ],
     "repository": {
         "type": "git",
         "url": "git+https://github.com/userscripters/generate-stackapps.git"

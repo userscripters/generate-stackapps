@@ -8,11 +8,13 @@ import { parsePackageName, prettifyPackageName } from "./utils/name.js";
  * @param options parsed {@link GeneratorOptions}
  */
 export const generateStackApps = (pkg, options) => {
-    const { author, description = "", license = "", name, version = "1.0.0" } = pkg;
+    const { author, contributors = [], description = "", license = "", name, version = "1.0.0" } = pkg;
     const { about = description, excerpt = description, installURL, languages = [], minifiedURL, orgName, orgURL, postTitle, roomURL, screenshotAlt = "screenshot of the script", screenshotURL = "", tags = [], testedIn = {}, thumbnailURL = "", } = options;
     const browserNames = Object.keys(testedIn);
     const testingData = Object.values(testedIn);
     const { name: authorName, url: authorUrl = "" } = parseAuthor(author);
+    const parsedContribs = contributors.map(parseAuthor);
+    const contribs = parsedContribs.length ? `\n\nContributors:${parsedContribs.map(({ name, url }) => `\n<br>${url ? mdLink(url, name) : name}`)}` : "";
     const { packageName, normalizedScopedName } = parsePackageName(name);
     const title = postTitle || `${prettifyPackageName(packageName)} - ${description}`;
     const minified = minifiedURL ? ` | ${mdLink(minifiedURL, "Minified")}` : "";
@@ -60,7 +62,7 @@ Version number means "last tested on":
 ## Contact
 
 Author: ${authorUrl ? mdLink(authorUrl, authorName) : authorName}
-${org}
+${org}${contribs}
 
 Please, submit bug reports ${mdLink(`https://github.com/${normalizedScopedName}/issues`, "on the source repository")}.
 <br>Before adding a new one, please check if it hasn't been raised before.

@@ -2,7 +2,7 @@ import { expect } from "chai";
 import { generateStackApps } from "../src/stackapps.js";
 import { parseAuthor } from "../src/utils/author.js";
 import { scase } from "../src/utils/common.js";
-import { about, excerpt, installURL, minifiedURL, orgName, orgURL, packageInfo, roomURL, screenshotAlt, screenshotURL, tags, testedIn, thumbnailURL } from "./fixtures.spec.js";
+import { about, contributors, excerpt, installURL, minifiedURL, orgName, orgURL, packageInfo, roomURL, screenshotAlt, screenshotURL, tags, testedIn, thumbnailURL } from "./fixtures.spec.js";
 
 describe(generateStackApps.name, async () => {
     const output = generateStackApps(packageInfo, {
@@ -37,6 +37,12 @@ describe(generateStackApps.name, async () => {
     it('should correctly generate author info', () => {
         const { name, url } = parseAuthor(packageInfo.author);
         expect(body).to.match(new RegExp(`\\[${name}\\]\\(${url}\\)`));
+    });
+
+    it('should correctly generate contributors list', () => {
+        contributors.forEach(({ name, url }) => {
+            expect(body).to.match(new RegExp(`\\[${name}\\]\\(${url}\\)`));
+        });
     });
 
     it('should correctly generate code info', () => {

@@ -1,6 +1,7 @@
 import { AssertionError } from "chai";
 import { join } from "path";
 import type { Browser } from "../src/stackapps.js";
+import { parseAuthor } from "../src/utils/author.js";
 import { getPackage } from "../src/utils/package.js";
 
 export const basePath = process.cwd();
@@ -12,6 +13,7 @@ if (!pkg) {
 }
 
 export const about = "Generates a StackApps post for the project";
+export const contributors = (pkg.contributors || []).map(parseAuthor);
 export const excerpt = pkg.description;
 export const installURL = pkg.repository.url;
 export const languages = ["TypeScript"];

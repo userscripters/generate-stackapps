@@ -4,7 +4,7 @@ import { stat, unlink } from "fs/promises";
 import { promisify } from "util";
 import { parseAuthor } from "../src/utils/author.js";
 import { scase } from "../src/utils/common.js";
-import { about, excerpt, installURL, languages, minifiedURL, orgName, orgURL, packageInfo, packagePath, roomURL, screenshotAlt, screenshotURL, tags, testedIn, thumbnailURL } from "./fixtures.spec.js";
+import { about, contributors, excerpt, installURL, languages, minifiedURL, orgName, orgURL, packageInfo, packagePath, roomURL, screenshotAlt, screenshotURL, tags, testedIn, thumbnailURL } from "./fixtures.spec.js";
 
 const aexec = promisify(exec);
 
@@ -66,6 +66,12 @@ describe("CLI", function () {
     it('should correctly generate author info', () => {
         const { name, url } = parseAuthor(packageInfo.author);
         expect(cliRuns[0]).to.match(new RegExp(`\\[${name}\\]\\(${url}\\)`));
+    });
+
+    it('should correctly generate contributors list', () => {
+        contributors.forEach(({ name, url }) => {
+            expect(cliRuns[0]).to.match(new RegExp(`\\[${name}\\]\\(${url}\\)`));
+        });
     });
 
     it('should correctly generate code info', () => {
