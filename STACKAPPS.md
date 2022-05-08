@@ -7,8 +7,6 @@ library typescript
 <!-- tag: library -->
 <!-- excerpt: Tired of writing Stack Apps posts by hand? With Generate StackApps you can focus on what's really important — userscripts and delegate the busywork to automation. -->
 
-## Screenshot / Code Snippet
-
 ## About
 
 Generate StackApps is a post Markdown generator for userscript projects reducing the amount of busywork required to publish userscripts for the benefit of the Stack Exchange network users. The package is highly customizable and takes a lot of the information from the project's package.json file (on an off-chance you are unfamiliar, here are the [NPM docs](https://docs.npmjs.com/creating-a-package-json-file)).
