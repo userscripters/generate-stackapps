@@ -88,7 +88,7 @@ export const generateStackApps = (
 
     const room = roomURL ? `\nYou can also ${mdLink(roomURL, "drop by to chat")}, we are a friendly bunch.` : "";
 
-    const screenshot = screenshotURL ? `!${mdLink(screenshotURL, screenshotAlt)}` : "";
+    const screenshot = screenshotURL ? `## Screenshot\n\n!${mdLink(screenshotURL, screenshotAlt)}\n` : "";
 
     const body = `
 ${makeTemplateComment("thumbnail", thumbnailURL)}
@@ -96,10 +96,7 @@ ${makeTemplateComment("version", version)}
 ${makeTemplateComment("tag", tags[0])}
 ${makeTemplateComment("excerpt", excerpt)}
 
-## Screenshot / Code Snippet
-
 ${screenshot}
-
 ## About
 
 ${about}
