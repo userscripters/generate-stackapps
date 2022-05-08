@@ -1,7 +1,7 @@
 {
     "name": "@userscripters/generate-stackapps",
     "description": "StackApps post generator for userscripts",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "main": "dist/index.js",
     "type": "module",
     "keywords": [

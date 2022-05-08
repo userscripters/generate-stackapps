@@ -6,7 +6,7 @@
 | Name | @userscripters/generate-stackapps |
 | Description | StackApps post generator for userscripts |
 | License | [GPL-3.0-or-later](https://spdx.org/licenses/GPL-3.0-or-later) |
-| Version | 1.0.2 |
+| Version | 1.0.3 |
 
 Creates StackApps post Markdown from project metadata.
 
