@@ -24,7 +24,8 @@ generate-stackapps \
     --room "https://chat.stackoverflow.com/rooms/214345" \
     --tag "library" \
     --tag "typescript" \
-    --thumbnail "https://i.stack.imgur.com/Cbt4Z.png"
+    --thumbnail "https://i.stack.imgur.com/Cbt4Z.png" \
+    --works-with "tampermonkey" "greasemonkey"
 ```
 
 Programmatic usage as a module:
@@ -42,7 +43,8 @@ const { body, tags, title } = await generate({
     testedIn: {
         chrome: "100.0.0"
     },
-    thumbnailURL: "https://i.stack.imgur.com/Cbt4Z.png"
+    thumbnailURL: "https://i.stack.imgur.com/Cbt4Z.png",
+    worksWith: ["tampermonkey", "greasemonkey"]
 });
 ```
 
