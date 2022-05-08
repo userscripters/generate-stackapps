@@ -8,91 +8,112 @@ const defaultTags = ["script"];
 const options = {
     a: {
         alias: "about",
+        description: "Long project description",
         type: "string"
     },
     cr: {
         alias: "chrome",
+        description: "Last tested Chrome version",
         type: "string"
     },
     d: {
         alias: "direct",
         default: false,
+        description: "Send output to process.stdout (CLI-only)",
         type: "boolean"
     },
     e: {
         alias: "excerpt",
+        description: "Short project description",
         type: "string"
     },
     ed: {
         alias: "edge",
+        description: "Last tested Edge version",
         type: "string"
     },
     ie: {
         alias: "explorer",
+        description: "Last tested Internet Explorer version",
         type: "string"
     },
     ff: {
         alias: "firefox",
+        description: "Last tested Firefox version",
         type: "string",
     },
     iu: {
         alias: "install",
         demandOption: true,
+        description: "Project installation URL",
         type: "string"
     },
     l: {
         alias: "language",
+        description: "Programming languages used (repeatable)",
         type: "array"
     },
     mu: {
         alias: "minified",
+        description: "Minified version installation URL",
         type: "string"
     },
     o: {
         alias: "output",
         default: "./STACKAPPS.md",
+        description: "Output file path (CLI-only)",
         type: "string"
     },
     on: {
         alias: "org-name",
+        description: "GitHub organization name",
         type: "string"
     },
     op: {
         alias: "opera",
+        description: "Last tested Opera version",
         type: "string"
     },
     ou: {
         alias: "org-url",
+        description: "GitHub organization URL",
         type: "string"
     },
     p: {
         alias: "package",
         default: "./package.json",
+        description: "Path to project's package.json",
         type: "string",
     },
     r: {
         alias: "room",
+        description: "Chat room URL",
         type: "string"
     },
     sa: {
         alias: "screenshot-alt",
+        description: "Project screenshot alt text",
         type: "string"
     },
     su: {
         alias: "screenshot-url",
+        description: "Project screenshot URL",
         type: "string"
     },
     tg: {
         alias: "tag",
         default: defaultTags,
+        description: "StackApps post tag (repeatable)",
         type: "array"
     },
     tl: {
         alias: "title",
+        description: "StackApps post title",
         type: "string"
     },
     th: {
         alias: "thumbnail",
+        description: "StackApps post thumbnail",
         type: "string"
     },
 };
