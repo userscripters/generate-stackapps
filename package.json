@@ -43,10 +43,10 @@
     "devDependencies": {
         "@types/chai": "^4.3.1",
         "@types/mocha": "^9.1.1",
-        "@types/node": "^17.0.31",
+        "@types/node": "^17.0.33",
         "@types/yargs": "^17.0.10",
         "@userscripters/generate-readme": "^2.3.1",
-        "@userscripters/generate-stackapps": "^1.0.3",
+        "@userscripters/generate-stackapps": "^1.2.0",
         "chai": "^4.3.6",
         "mocha": "^10.0.0",
         "rimraf": "^3.0.2",
@@ -58,6 +58,6 @@
     },
     "dependencies": {
         "chalk": "^5.0.1",
-        "yargs": "^17.4.1"
+        "yargs": "^17.5.0"
     }
 }
