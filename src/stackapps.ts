@@ -96,9 +96,19 @@ export const generateStackApps = (
 
     const screenshot = screenshotURL ? `## Screenshot\n\n!${mdLink(screenshotURL, screenshotAlt)}\n` : "";
 
-    const managers = managerNames.length ?
-        `\nSupported userscript managers:\n\n${managerNames.map((n) => `- ${scase(n)}`).join("\n")}\n` :
+    const testing = testingData.some(Boolean) ?
+        `Version number means "last tested on":
+
+| ${browserNames.map(scase).join(" | ")} |
+| ${new Array(browserNames.length).fill("-").join(" | ")} |
+| ${testingData.map((data) => data && !data.startsWith("no") ? `✔ ${data}` : "-").join(" | ")} |\n` :
         "";
+
+    const managers = managerNames.length ?
+        `${testing ? "\n" : ""}Supported userscript managers:\n\n${managerNames.map((n) => `- ${scase(n)}`).join("\n")}\n` :
+        "";
+
+    const platform = managers || testing ? `\n\n### Platform\n\n${testing}${managers}` : "";
 
     const body = `
 ${makeTemplateComment("thumbnail", thumbnailURL)}
@@ -120,15 +130,7 @@ The script is licensed under the ${mdLink(`https://spdx.org/licenses/${license}`
 Latest version: ${version}
 
 ${mdLink(installURL, "Install")}${minified}
-
-### Platform
-
-Version number means "last tested on":
-
-| ${browserNames.map(scase).join(" | ")} |
-| ${new Array(browserNames.length).fill("-").join(" | ")} |
-| ${testingData.map((data) => data && !data.startsWith("no") ? `✔ ${data}` : "-").join(" | ")} |
-${managers}
+${platform}
 ## Change log
 
 | Version    | Description |

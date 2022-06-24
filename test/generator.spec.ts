@@ -1,11 +1,11 @@
 import { expect } from "chai";
-import { generateStackApps } from "../src/stackapps.js";
+import { generateStackApps, type GeneratorOptions } from "../src/stackapps.js";
 import { parseAuthor } from "../src/utils/author.js";
 import { scase } from "../src/utils/common.js";
 import { about, contributors, excerpt, installURL, minifiedURL, orgName, orgURL, packageInfo, roomURL, screenshotAlt, screenshotURL, tags, testedIn, thumbnailURL, worksWith } from "./fixtures.spec.js";
 
 describe(generateStackApps.name, async () => {
-    const output = generateStackApps(packageInfo, {
+    const generatorOptions: GeneratorOptions = {
         about,
         excerpt,
         installURL,
@@ -20,7 +20,9 @@ describe(generateStackApps.name, async () => {
         testedIn,
         thumbnailURL,
         worksWith
-    });
+    };
+
+    const output = generateStackApps(packageInfo, generatorOptions);
 
     const { body, tags: generatedTags, title } = output;
 
@@ -80,6 +82,13 @@ describe(generateStackApps.name, async () => {
 
         const managers = worksWith.map((n) => `- ${scase(n)}`).join("\n");
         expect(body).to.include(managers);
+    });
+
+    it('should skip the platform section on no testing data', () => {
+        const { worksWith, testedIn, ...options } = generatorOptions;
+        const { body } = generateStackApps(packageInfo, options);
+        expect(body).to.not.include("## Platform");
+        expect(body).to.not.include("Supported userscript managers");
     });
 
     it('should correctly generate org info', () => {

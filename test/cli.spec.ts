@@ -44,6 +44,7 @@ describe("CLI", function () {
         const runs = await Promise.all([
             aexec(`${cliPfx} ${[...args, "-d"].join(" ")}`),
             aexec(`${cliPfx} ${args.join(" ")}`),
+            aexec(`${cliPfx} -d --iu "${installURL}"`),
         ]);
 
         cliRuns.push(...runs.map((r) => r.stdout));
@@ -115,6 +116,12 @@ describe("CLI", function () {
 
         const managers = worksWith.map((n) => `- ${scase(n)}`).join("\n");
         expect(output).to.include(managers);
+    });
+
+    it('should skip the platform section on no testing data', () => {
+        const [_, __, output] = cliRuns;
+        expect(output).to.not.include("## Platform");
+        expect(output).to.not.include("Supported userscript managers");
     });
 
     it('should correctly generate org info', () => {
