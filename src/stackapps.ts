@@ -1,5 +1,5 @@
 import { parseAuthor } from "./utils/author.js";
-import { scase } from "./utils/common.js";
+import { scase, uniqify } from "./utils/common.js";
 import { makeTemplateComment, mdLink } from "./utils/index.js";
 import { parsePackageName, prettifyPackageName } from "./utils/name.js";
 import type { PackageInfo } from "./utils/package.js";
@@ -71,7 +71,7 @@ export const generateStackApps = (
     const browserNames = Object.keys(testedIn);
     const testingData = Object.values(testedIn);
 
-    const managerNames = worksWith.map(scase);
+    const managerNames = uniqify(worksWith.map(scase));
 
     const {
         name: authorName,

@@ -91,6 +91,19 @@ describe(generateStackApps.name, async () => {
         expect(body).to.not.include("Supported userscript managers");
     });
 
+    it('should only add unique "works with" entries', () => {
+        const { worksWith = [], ...options } = generatorOptions;
+        worksWith.push(...worksWith);
+        const { body } = generateStackApps(packageInfo, { ...options, worksWith });
+
+        const generatedOnlyOnce = worksWith.every((managerName) => {
+            const matches = [...body.matchAll(new RegExp(`\\b${managerName}\\b`, "gi"))];
+            return matches.length === 1;
+        });
+
+        expect(generatedOnlyOnce).to.be.true;
+    });
+
     it('should correctly generate org info', () => {
         expect(body).to.match(new RegExp(`\\[${orgName}\\]\\(${orgURL}\\)`));
     });

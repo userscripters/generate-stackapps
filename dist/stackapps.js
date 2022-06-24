@@ -1,5 +1,5 @@
 import { parseAuthor } from "./utils/author.js";
-import { scase } from "./utils/common.js";
+import { scase, uniqify } from "./utils/common.js";
 import { makeTemplateComment, mdLink } from "./utils/index.js";
 import { parsePackageName, prettifyPackageName } from "./utils/name.js";
 /**
@@ -12,7 +12,7 @@ export const generateStackApps = (pkg, options) => {
     const { about = description, excerpt = description, installURL, languages = [], minifiedURL, orgName, orgURL, postTitle, roomURL, screenshotAlt = "screenshot of the script", screenshotURL = "", tags = [], testedIn = {}, thumbnailURL = "", worksWith = [] } = options;
     const browserNames = Object.keys(testedIn);
     const testingData = Object.values(testedIn);
-    const managerNames = worksWith.map(scase);
+    const managerNames = uniqify(worksWith.map(scase));
     const { name: authorName, url: authorUrl = "" } = parseAuthor(author);
     const parsedContribs = contributors.map(parseAuthor);
     const contribs = parsedContribs.length ? `\n\nContributors:${parsedContribs.map(({ name, url }) => `\n<br>${url ? mdLink(url, name) : name}`)}` : "";
@@ -22,9 +22,17 @@ export const generateStackApps = (pkg, options) => {
     const org = orgName ? `<br>Organization: ${orgURL ? mdLink(orgURL, orgName) : orgName}` : "";
     const room = roomURL ? `\nYou can also ${mdLink(roomURL, "drop by to chat")}, we are a friendly bunch.` : "";
     const screenshot = screenshotURL ? `## Screenshot\n\n!${mdLink(screenshotURL, screenshotAlt)}\n` : "";
-    const managers = managerNames.length ?
-        `\nSupported userscript managers:\n\n${managerNames.map((n) => `- ${scase(n)}`).join("\n")}\n` :
+    const testing = testingData.some(Boolean) ?
+        `Version number means "last tested on":
+
+| ${browserNames.map(scase).join(" | ")} |
+| ${new Array(browserNames.length).fill("-").join(" | ")} |
+| ${testingData.map((data) => data && !data.startsWith("no") ? `✔ ${data}` : "-").join(" | ")} |\n` :
         "";
+    const managers = managerNames.length ?
+        `${testing ? "\n" : ""}Supported userscript managers:\n\n${managerNames.map((n) => `- ${scase(n)}`).join("\n")}\n` :
+        "";
+    const platform = managers || testing ? `\n\n### Platform\n\n${testing}${managers}` : "";
     const body = `
 ${makeTemplateComment("thumbnail", thumbnailURL)}
 ${makeTemplateComment("version", version)}
@@ -45,15 +53,7 @@ The script is licensed under the ${mdLink(`https://spdx.org/licenses/${license}`
 Latest version: ${version}
 
 ${mdLink(installURL, "Install")}${minified}
-
-### Platform
-
-Version number means "last tested on":
-
-| ${browserNames.map(scase).join(" | ")} |
-| ${new Array(browserNames.length).fill("-").join(" | ")} |
-| ${testingData.map((data) => data && !data.startsWith("no") ? `✔ ${data}` : "-").join(" | ")} |
-${managers}
+${platform}
 ## Change log
 
 | Version    | Description |
