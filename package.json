@@ -43,7 +43,7 @@
     "devDependencies": {
         "@types/chai": "^4.3.1",
         "@types/mocha": "^9.1.1",
-        "@types/node": "^18.0.5",
+        "@types/node": "^18.6.3",
         "@types/yargs": "^17.0.10",
         "@userscripters/generate-readme": "^2.3.1",
         "@userscripters/generate-stackapps": "^1.3.0",
