@@ -42,7 +42,7 @@
     "homepage": "https://github.com/userscripters/generate-stackapps",
     "devDependencies": {
         "@types/chai": "^4.3.4",
-        "@types/mocha": "^9.1.1",
+        "@types/mocha": "^10.0.0",
         "@types/node": "^18.11.9",
         "@types/yargs": "^17.0.13",
         "@userscripters/generate-readme": "^2.3.1",
