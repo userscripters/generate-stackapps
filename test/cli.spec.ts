@@ -9,7 +9,7 @@ import { about, contributors, excerpt, installURL, languages, minifiedURL, orgNa
 const aexec = promisify(exec);
 
 describe("CLI", function () {
-    this.timeout(5000); // CLI runs can be slow
+    this.timeout(1e4); // CLI runs can be very slow
 
     const entry = "./src/index.ts";
     const output = "./test/stackapps.md";
