@@ -43,7 +43,7 @@
     "devDependencies": {
         "@types/chai": "^4.3.14",
         "@types/mocha": "^10.0.6",
-        "@types/node": "^20.12.5",
+        "@types/node": "^20.12.7",
         "@types/yargs": "^17.0.32",
         "@userscripters/generate-readme": "^3.0.2",
         "@userscripters/generate-stackapps": "^1.3.0",
@@ -51,7 +51,7 @@
         "mocha": "^10.4.0",
         "rimraf": "^5.0.5",
         "ts-node": "^10.9.2",
-        "typescript": "^5.4.4"
+        "typescript": "^5.4.5"
     },
     "bin": {
         "generate-stackapps": "dist/index.js"
