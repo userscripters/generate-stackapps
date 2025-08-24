@@ -1,4 +1,4 @@
-import { pathToFileURL } from "url";
+import esMain from 'es-main';
 import yargs from "yargs";
 import { hideBin } from "yargs/helpers";
 import { generate } from "./generator.js";
@@ -159,7 +159,7 @@ cli.command(
     }) => {
         await generate({
             about: a,
-            cli: import.meta.url === pathToFileURL(process.argv[1]).href,
+            cli: esMain(import.meta),
             direct: !!d,
             excerpt: e,
             installURL: iu,

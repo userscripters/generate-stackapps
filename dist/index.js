@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { pathToFileURL } from "url";
+import esMain from 'es-main';
 import yargs from "yargs";
 import { hideBin } from "yargs/helpers";
 import { generate } from "./generator.js";
@@ -127,7 +127,7 @@ const options = {
 cli.command("$0", `generates a StackApps post for the project`, options, async ({ a, cr, d, e, ed, ff, ie, iu, l = [], mu, o, on, ou, op, p, r, sa, su, tg = [], tl, th, ww = [] }) => {
     await generate({
         about: a,
-        cli: import.meta.url === pathToFileURL(process.argv[1]).href,
+        cli: esMain(import.meta),
         direct: !!d,
         excerpt: e,
         installURL: iu,
